@@ -1,12 +1,23 @@
-function filterData(data, filter) {
-    if (!filter) return data;
-    return data.filter(item => item.language === filter);
+// src/controllers/dataController.js
+
+function filterData(data, filters) {
+    if (!filters || !filters.filterBy || !filters.filterValue) return data;
+  
+    const validFilterFields = ['name', 'language', 'id', 'bio', 'version'];
+    
+    if (!validFilterFields.includes(filters.filterBy)) {
+      throw new Error(`Invalid filter field: ${filters.filterBy}`);
+    }
+  
+    return data.filter(item => {
+      return item[filters.filterBy].toString().toLowerCase().includes(filters.filterValue.toLowerCase());
+    });
   }
   
   function sortData(data, sortBy) {
     if (!sortBy) return data;
   
-    const validSortFields = ['name', 'version']; // Adjust based on your data
+    const validSortFields = ['name', 'language', 'id', 'bio', 'version'];
     if (!validSortFields.includes(sortBy)) {
       throw new Error(`Invalid sort field: ${sortBy}`);
     }
@@ -20,18 +31,28 @@ function filterData(data, filter) {
   }
   
   function getData(req, res) {
-    const { filter, sortBy } = req.query;
+    const { filterBy, filterValue, sortBy } = req.query;
+    const filters = {
+      filterBy,
+      filterValue
+    };
   
     try {
-      let result = req.data; // Data should be passed via request object
+      let result = req.data;
   
-      result = filterData(result, filter);
+      if (filterBy || filterValue) {
+        result = filterData(result, filters);
+      }
       result = sortData(result, sortBy);
+  
+      if (result.length === 0) {
+        return res.status(404).json({ message: 'No data found' });
+      }
   
       res.json(result);
     } catch (error) {
       console.error('Error processing data:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
+      res.status(400).json({ message: error.message });
     }
   }
   

@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "a905a068-4ece-47cc-9f48-c2104844ddd0",
+		"name": "Rocketium_API_calls",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34641833"
+	},
+	"item": [
+		{
+			"name": "Get all the data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter by Language",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/data/filter?filterBy=language&filterValue=Sindhi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"data",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "filterBy",
+							"value": "language"
+						},
+						{
+							"key": "filterValue",
+							"value": "Sindhi"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sort by Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/data/filter?sortBy=name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"data",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter by Language and Sort by Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/data/filter?filterBy=language&filterValue=Sindhi&sortBy=name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"data",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "filterBy",
+							"value": "language"
+						},
+						{
+							"key": "filterValue",
+							"value": "Sindhi"
+						},
+						{
+							"key": "sortBy",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Filter Field",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/data/filter?filterBy=invalidField&filterValue=value",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"data",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "filterBy",
+							"value": "invalidField"
+						},
+						{
+							"key": "filterValue",
+							"value": "value"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
